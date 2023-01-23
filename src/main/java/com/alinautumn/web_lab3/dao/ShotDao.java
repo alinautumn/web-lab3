@@ -1,4 +1,4 @@
-package com.alinautumn.web_lab3;
+package com.alinautumn.web_lab3.dao;
 
 import com.alinautumn.web_lab3.entity.Shot;
 import jakarta.inject.Named;

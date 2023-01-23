@@ -37,6 +37,11 @@ input[type="button"]:hover, input[type="submit"]:hover{
     border: solid 2px mediumpurple;
 }
 
+input[type="button"].Xbutton{
+    width: 40px;
+    border-radius: 20px;
+}
+
 #data_table{
     padding: 10px;
 }
@@ -68,12 +73,18 @@ svg{
     cursor: pointer;
 }
 
-input[type=text]{
-    cursor: pointer;
-}
-
 input[type=radio]{
     cursor: pointer;
 }
 
+.message{
+    color: red;
+}
 
+form input[type=text]{
+    height: 39px;
+    width: 200px;
+    padding: 10px;
+    border: 2px solid mediumpurple;
+    cursor: pointer;
+}

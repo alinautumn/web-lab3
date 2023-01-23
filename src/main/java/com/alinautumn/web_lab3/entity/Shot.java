@@ -1,10 +1,15 @@
-package com.alinautumn.web_lab3;
+package com.alinautumn.web_lab3.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 @Entity
 @Table(name = "shots")
-public class Shot {
+public class Shot implements Serializable, Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -12,7 +17,7 @@ public class Shot {
     private double y;
     private double r;
     private boolean status;
-    private String currentTime;
+    private long currentTime;
     private long scriptTime;
     public Shot(){
 
@@ -49,11 +54,11 @@ public class Shot {
         this.status = status;
     }
 
-    public String getCurrentTime() {
+    public long getCurrentTime() {
         return currentTime;
     }
 
-    public void setCurrentTime(String currentTime) {
+    public void setCurrentTime(long currentTime) {
         this.currentTime = currentTime;
     }
 
@@ -63,5 +68,19 @@ public class Shot {
 
     public void setScriptTime(long scriptTime) {
         this.scriptTime = scriptTime;
+    }
+
+    public String getFormattedTime() {
+        return new SimpleDateFormat("dd.MM.yy HH:mm:ss")
+                .format(new Date(currentTime));
+    }
+
+    @Override
+    public Shot clone() {
+        Shot cloned = new Shot();
+        cloned.x = x;
+        cloned.y = y;
+        cloned.r = r;
+        return cloned;
     }
 }

@@ -1,46 +1,45 @@
-package com.alinautumn.web_lab3;
+package com.alinautumn.web_lab3.beans;
 
+import com.alinautumn.web_lab3.dao.ShotDao;
+import com.alinautumn.web_lab3.utils.AreaHitChecker;
+import com.alinautumn.web_lab3.entity.Shot;
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.context.ExternalContext;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.inject.Named;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
+@ApplicationScoped
+@Named("shotBean")
 public class ShotBean implements Serializable {
     private Shot shot;
     @Inject
     private ShotDao shotDao;
-    private List<Shot> shotsList;
+    private List<Shot> shotsList = new CopyOnWriteArrayList<>();
     private int timezone;
 
     @PostConstruct
-    public void postConstruct(){
+    public void postConstruct() {
         shot = new Shot();
         shotDao.createEntityManager();
         shotsList = shotDao.getShotsFromDB();
     }
 
-    public void add(){
-        LocalDateTime startTime = LocalDateTime.now(ZoneOffset.UTC);
-        if(Validator.isValid(shot)) {
+    public void add() {
+            LocalDateTime startTime = LocalDateTime.now(ZoneOffset.UTC);
             shot.setStatus(AreaHitChecker.isHit(shot));
-            shot.setCurrentTime(startTime.minusMinutes(getTimezone()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            shot.setCurrentTime(System.currentTimeMillis());
             shot.setScriptTime(Math.round(LocalDateTime.now().minusNanos(startTime.getNano()).getNano() * 0.001));
             shotsList.add(shot);
             shotDao.addShotToDB(shot);
-            shot = new Shot();
-        }else{
-            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-            HttpServletResponse response = (HttpServletResponse) context.getResponse();
-            response.setStatus(500);
-        }
+            shot = shot.clone();
     }
 
     public void addThroughPlot(){

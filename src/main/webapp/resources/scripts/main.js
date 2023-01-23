@@ -17,17 +17,17 @@ function isHit(x, y, r){
 }
 
 function isRectangleZone(x, y, r){
-    return (x<=0) && (y<=0) && (x>=(-1)*r) && (y>=(-1)*r/2);
+    return (x<=0) && (y<=0) && (x>=(-1)*r/2) && (y>=(-1)*r);
 }
 function isTriangleZone(x, y, r){
-    return (x>=0) && (y<=0) && (y>=x-r/2);
+    return (x<=0) && (y>=0) && (2*y - x <= r);
 }
 function isCircleZone(x, y, r){
-    return (x*x + y*y <= r*r) && (x>=0) && (y>=0);
+    return (x*x + y*y <= Math.pow(r / 2, 2)) && (x>=0) && (y<=0);
 }
 
 function changingPlot() {
-    let r = parseFloat(document.getElementById('form:value_R_hinput').value) * 30;
+    let r = parseFloat(document.getElementById('form:value_R_input').value) * 30;
     $('#circleX_1').attr('cx', 150 - r);
     $('#circleX_2').attr('cx', 150 - r / 2);
     $('#circleX_3').attr('cx', 150 + r / 2);
@@ -40,9 +40,9 @@ function changingPlot() {
     $('#nameX_2').attr('x', 150 + r - 5);
     $('#nameY_1').attr('y', 150 - r + 2.5);
     $('#nameY_2').attr('y', 150 + r + 2.5);
-    $('#triangle').attr('points', (150 + r / 2) + ",150 150, " + (150 + r / 2) + " 150,150");
-    $('#rectangle').attr('points', "150,150 150," + (150 + r / 2) + " " + (150 - r) + "," + (150 + r / 2) + " " + (150 - r) + ",150");
-    $('#circle').attr('d', "M" + "150," + (150 - r) + " A" + r + "," + r + " 90 0,1 " + (150 + r) + ",150" + " L 150,150 Z");
+    $('#triangle').attr('points', "150," + (150 - r / 2) + " " + (150 - r) + ",150" + " 150,150");
+    $('#rectangle').attr('points', "150,150 150," + (150 + r) + " " + (150 - r / 2) + "," + (150 + r) + " " + (150 - r / 2) + ",150");
+    $('#circle').attr('d', "M" + (150 + r / 2) + ",150" + " A" + r / 2 + "," + r / 2 + " 90 0,1 " + "150," + (150 + r / 2) + " L 150,150 Z");
 }
 
 function isValid(x, y, r){
