@@ -1,0 +1,79 @@
+.bio{
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    padding: 5px 40px;
+}
+
+#firstbio{
+    padding-top: 15%;
+}
+
+body {
+    background: -webkit-linear-gradient(45deg, pink 0%, wheat 33%, pink 66%, wheat 100%);
+    font-family: sans-serif;
+    font-size: 14px;
+    min-height: 830px;
+    color: white;
+}
+
+table{
+    width: 100%;
+}
+
+input[type="button"], input[type="submit"]{
+    background: mediumpurple;
+    color: white;
+    cursor: pointer;
+    mix-blend-mode: multiply;
+    padding: 6px 14px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: solid 2px transparent;
+}
+input[type="button"]:hover, input[type="submit"]:hover{
+    background: transparent;
+    color: black;
+    border: solid 2px mediumpurple;
+}
+
+#data_table{
+    padding: 10px;
+}
+
+.col{
+    width: 50%;
+    text-align: center;
+}
+
+fieldset{
+    border: solid 2px mediumpurple;
+}
+
+fieldset legend{
+    padding: 0 12px;
+}
+
+form td, form th, fieldset legend {
+    text-align: left;
+}
+
+form td{
+    width: 10%;
+}
+
+svg{
+    stroke: #2E2F45;
+    fill: #2E2F45;
+    cursor: pointer;
+}
+
+input[type=text]{
+    cursor: pointer;
+}
+
+input[type=radio]{
+    cursor: pointer;
+}
+
+
